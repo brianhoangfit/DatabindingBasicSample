@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable name="viewmodel" type="com.brian.databindingbasic.ProfileViewModel"/>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".MainActivity">
+
+
+        <TextView
+                android:id="@+id/name_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/txt_name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+                android:id="@+id/name_value"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                app:layout_constraintEnd_toStartOf="@id/imageView"
+                app:layout_constraintStart_toStartOf="@+id/name_label"
+                android:text="@{viewmodel.name}"
+                app:layout_constraintTop_toBottomOf="@+id/name_label"
+                tools:text="Brian"/>
+
+        <TextView
+                android:id="@+id/lastname_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_last_name"
+                app:layout_constraintStart_toStartOf="@+id/name_label"
+                app:layout_constraintTop_toBottomOf="@+id/name_value"
+                tools:layout_editor_absoluteX="7dp"
+                tools:layout_editor_absoluteY="132dp"/>
+
+        <TextView
+                android:id="@+id/lastname_value"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                app:layout_constraintEnd_toEndOf="@id/name_value"
+                app:layout_constraintStart_toStartOf="@+id/name_label"
+                app:layout_constraintTop_toBottomOf="@+id/lastname_label"
+                tools:layout_editor_absoluteX="7dp"
+                android:text="@{viewmodel.lastName}"
+                tools:layout_editor_absoluteY="165dp"
+                tools:text="Hoang"/>
+
+        <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:contentDescription="@string/image_description"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
+                app:layout_constraintBottom_toTopOf="@+id/like_label"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:popularityIcon="@{viewmodel.popularity}"
+                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:src="@drawable/ic_person_black_96dp"/>
+
+        <TextView
+                android:id="@+id/like_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_likes"
+                android:textAlignment="center"
+                app:layout_constraintBottom_toTopOf="@+id/likes_value"
+                app:layout_constraintEnd_toEndOf="@+id/imageView"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/imageView"
+                app:layout_constraintTop_toBottomOf="@id/imageView"
+                tools:layout_editor_absoluteY="144dp"/>
+
+        <TextView
+                android:id="@+id/likes_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{Integer.toString(viewmodel.likes)}"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                app:layout_constraintEnd_toEndOf="@+id/like_label"
+                app:layout_constraintBottom_toTopOf="@+id/like_button"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/like_label"
+                app:layout_constraintTop_toBottomOf="@+id/like_label"/>
+
+        <Button
+                android:id="@+id/like_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:text="@string/txt_like"
+                app:layout_constraintBottom_toTopOf="@+id/progressBar"
+                android:onClick="@{() -> viewmodel.onLike()}"
+                app:layout_constraintEnd_toEndOf="@+id/imageView"
+                app:layout_constraintStart_toStartOf="@+id/imageView"
+                app:layout_constraintTop_toBottomOf="@+id/likes_value"
+                app:layout_constraintVertical_bias="0.0"/>
+
+        <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:max="@{100}"
+                app:progressScaled="@{viewmodel.likes}"
+                app:progressTint="@{viewmodel.popularity}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/like_button"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/like_button"
+                app:layout_constraintTop_toBottomOf="@+id/like_button"
+                tools:progressBackgroundTint="@android:color/darker_gray"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

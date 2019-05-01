@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">DatabindingBasic</string>
+
+    <string name="txt_name">Name</string>
+    <string name="txt_last_name">Last name</string>
+    <string name="image_description">Profile Image</string>
+    <string name="txt_likes">Likes</string>
+    <string name="txt_like">Like</string>
+</resources>
